@@ -7,4 +7,4 @@ export NODE_ENV=production
 export SUPPRESS_NO_CONFIG_WARNING=1
 
 cd /opt/nginx-proxy-manager
-exec sudo node --abort_on_uncaught_exception --max_old_space_size=250 index.js
+exec node --abort_on_uncaught_exception --max_old_space_size=250 index.js
