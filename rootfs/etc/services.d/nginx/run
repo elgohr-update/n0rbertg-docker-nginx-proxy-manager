@@ -9,7 +9,12 @@ do
     chown app:app "$DIR"
 done
 
+#Run NGINX as root
+if [ -z ${USERID_NGINX+x} ]; then USERID_NGINX=0; fi
+if [ -z ${GROUPID_NGINX+x} ]; then GROUPID_NGINX=0; fi
+
+
 echo "[$(basename "$(pwd)")] starting..."
-exec s6-applyuidgid -u 0 -g 0 -G ${SUP_GROUP_IDS:-$GROUP_ID} /usr/sbin/nginx
+exec s6-applyuidgid -u $USERID_NGINX -g $GROUPID_NGINX -G ${SUP_GROUP_IDS:-$GROUP_ID} /usr/sbin/nginx
 
 # vim:ft=sh:ts=4:sw=4:et:sts=4
