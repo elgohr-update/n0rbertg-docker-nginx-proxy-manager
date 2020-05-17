@@ -200,5 +200,5 @@ LABEL \
       org.label-schema.name="nginx-proxy-manager" \
       org.label-schema.description="Docker container for Nginx Proxy Manager" \
       org.label-schema.version="$DOCKER_IMAGE_VERSION" \
-      org.label-schema.vcs-url="https://github.com/jlesage/docker-nginx-proxy-manager" \
+      org.label-schema.vcs-url="https://github.com/n0rbertg/docker-nginx-proxy-manager" \
       org.label-schema.schema-version="1.0"
