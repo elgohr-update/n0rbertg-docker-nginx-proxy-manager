@@ -6,18 +6,17 @@ set -u # Treat unset variables as an error.
 mkdir -p /run/mysqld
 chown $USER_ID:$GROUP_ID /run/mysqld
 
-MYSQLD_CMD="/usr/bin/mysqld --datadir /config/mysql --tmpdir /tmp/"
+MYSQLD_CMD="/usr/bin/mysqld --datadir /config/mysql --tmpdir /tmp/ --user=root"
 
-if [ -z ${USERID_MYSQL+x} ]; then USERID_MYSQL=0; fi
-if [ -z ${GROUPID_MYSQL+x} ]; then GROUPID_MYSQL=0; fi
+
 
 echo "[$(basename "$(pwd)")] starting..."
 if [ -d  /var/run/s6/services/mysqld ]; then
     # Supervisor is running.
-    exec /bin/s6-notifyoncheck s6-applyuidgid -u $USERID_MYSQL -g $GROUPID_MYSQL -G ${SUP_GROUP_IDS:-$GROUP_ID} $MYSQLD_CMD
+    exec /bin/s6-notifyoncheck s6-applyuidgid -u $USER_ID -g $GROUP_ID -G ${SUP_GROUP_IDS:-$GROUP_ID} $MYSQLD_CMD
 else
     # Supervisor is not running: we are starting the db from the init script.
-    exec s6-applyuidgid -u $USERID_MYSQL -g $GROUPID_MYSQL -G ${SUP_GROUP_IDS:-$GROUP_ID} $MYSQLD_CMD
+    exec s6-applyuidgid -u $USER_ID -g $GROUP_ID -G ${SUP_GROUP_IDS:-$GROUP_ID} $MYSQLD_CMD
 fi
 
 # vim:ft=sh:ts=4:sw=4:et:sts=4
