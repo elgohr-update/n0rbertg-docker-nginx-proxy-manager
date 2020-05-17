@@ -30,6 +30,7 @@ RUN \
         mariadb-server-utils \
         certbot \
         openssl \
+        sudo \
         apache2-utils \
         logrotate \
         && \
