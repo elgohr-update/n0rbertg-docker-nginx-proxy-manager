@@ -123,7 +123,7 @@ RUN \
     sed-patch 's|-g "error_log off;"||' /opt/nginx-proxy-manager/internal/nginx.js && \
 
     # Remove the `user` directive, since we want nginx to run as non-root.
-    sed-patch 's|user root;|#user root;|' /etc/nginx/nginx.conf && \
+    # sed-patch 's|user root;|#user root;|' /etc/nginx/nginx.conf && \
 
     # Make sure nginx loads the stream module.
     sed-patch '/daemon off;/a load_module /usr/lib/nginx/modules/ngx_stream_module.so;' /etc/nginx/nginx.conf && \
